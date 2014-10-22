@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Polyglot</title>
+	<link rel="stylesheet" href="css/site_main.css">
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<header class="site-title">
+		Polyglot
+	</header>
+	<section class="visual-banner">
+			<header class="language-title">
+				ようこそ! 日本語を習いましょう!
+			</header>
+			<header class="language-title-english">
+				(Welcome! Let's learn Japanese!)
+			</header>
+			<section class="japanese-main-area">
+				<nav class="japanese-options">
+					<h1>Insert a new Japanese Word</h1>
+					<form id="japanese-word-insert" action="japanese_word_insert.php" method="post">
+						<div>
+    						<label for="japanese">Japanese (roman characters):</label>
+    						<input type="text" name="japanese" placeholder="e.g. ame" maxlength="50" size="50">
+   						</div>
+   						<div>
+    						<label for="english">English:</label>
+    						<input type="text" name="english" placeholder="e.g. rain" maxlength="50" size="50">
+   						</div>
+   						<div>
+    						<label for="hiragana">Japanese Kana:</label>
+    						<input type="text" name="hiragana" placeholder="e.g. あめ" maxlength="50" size="50">
+   						</div>
+   						<div>
+    						<label for="kanji">Japanese Kanji:</label>
+    						<input type="text" name="kanji" placeholder="e.g. 雨" maxlength="50" size="50">
+   						</div>
+   						<div>
+   							<input type="submit" value="Insert">
+   						</div>
+					</form>
+				</nav>
+			</section>
+	</section>
+</body>
+</html>
