@@ -23,7 +23,7 @@ require 'config.php';
 	<body>
 		<header>
 			<p class="text-center">
-				Welcome <?php if(!empty($_SESSION['name'])){echo $_SESSION['name'];}?>
+				Welcome <?php if(!empty($_SESSION['name'])){echo $_SESSION['name']; echo "<form action='logout.php'><button class='btn btn-success btn-block' type='submit'>Logout</button></form>";} else {echo "<a href='mongo_login.php'>Login</a>";}?>
 			</p>
 		</header>
 		<div class="container container_index">
@@ -45,33 +45,48 @@ require 'config.php';
 								<span class="help-block"></span>
 							</div>
 							<div class="form-group">
-							    <select class="form-control" name="category" id="category">
-							        <option value="">Choose your quiz category</option>
-                                  <option value="1">Kanji</option>
-                                  <option value="2">Kana</option>
-                                  <option value="3">Vocab</option>
-                                  <option value="4">Comprehension</option>                                
-                                </select>
+								<select class="form-control" name="category" id="category">
+								      <option value="">Choose your quiz category</option>
+								<?php
+								$res = mysql_query("SELECT category_name FROM categories WHERE 1") or die(mysql_error());
+								$num_rows = mysql_num_rows($res);
+								$val_counter = 1;
+								while( $row_result=mysql_fetch_array($res) ){?>
+	                                  <option value='<?php echo $row_result["category_name"];?>'><?php echo $row_result['category_name'];?></option>
+	                                  <?php
+	                                  //$val_counter++;?>
+	                                  <!--<option value="2">Kana</option>
+	                                  <option value="3">Vocab</option>
+	                                  <option value="4">Comprehension</option>-->
+	                            <?php } ?>                                
+	                            </select>
                                 <span class="help-block"></span>
 							</div>
-
+						
 							<br>
 							<button id="start_button" class="btn btn-success btn-block" type="submit">
 								Start
 							</button>
+						</form>
 							<div id="quiz_button" class="btn btn-success btn-block">
 								Quiz
 							</div>
-							<div id="create_button" class="btn btn-success btn-block">
-								Create 
-							</div>
+						<form class="form-signin" method="post" id='create_quiz_form' name="create_quiz_form" action="create_quiz.php">
+							<button id="create_button" class="btn btn-success btn-block" type="submit">
+								Create Quiz
+							</button>
+						</form>
+						<form class="form-signin" method="post" id='edit_quiz_form' name="edit_quiz_form" action="edit_quiz.php">
+							<button id="edit_button" class="btn btn-success btn-block" type="submit">
+								Edit Quiz
+							</button>
 						</form>
 
 						<?php }else{?>
 						    <form class="form-signin" method="post" id='signin' name="signin" action="questions.php">
                             <div class="form-group">
                                 <select class="form-control" name="category" id="category">
-                                    <option value="">Choose your quiz category</option>
+                                  <option value="">Choose your quiz category</option>
                                   <option value="1">Kanji</option>
                                   <option value="2">Kana</option>
                                   <option value="3">Vocab</option>
@@ -163,6 +178,7 @@ require 'config.php';
 			$("#start_button").fadeIn("slow");
 			$(this).fadeOut("slow");
 			$("#create_button").fadeOut("slow");
+			$("#edit_button").fadeOut("slow");
 		});
 		</script>
 	</body>

@@ -61,19 +61,19 @@ if(!empty($_SESSION['name'])){
         <div class="container result">
             <div class="row"> 
                     <div class='result-logo'>
-                            <img src="image/Quiz_result.png" class="img-responsive"/>
+                            <!-- <img src="image/Quiz_result.png" class="img-responsive"/> -->
                     </div>    
            </div>  
            <hr>   
            <div class="row"> 
                   <div class="col-xs-18 col-sm-9 col-lg-9"> 
                     <div class='result-logo1'>
-                            <img src="image/cat.GIF" class="img-responsive"/>
+                            <!-- <img src="image/cat.GIF" class="img-responsive"/> -->
                     </div>
                   </div>
 
                   <div class="col-xs-6 col-sm-3 col-lg-3"> 
-                     <a href="<?php echo BASE_PATH;?>" class='btn btn-success'>Start new Quiz!!!</a>                   
+                     <a href="<?php echo BASE_PATH;?>" class='btn btn-success'>Start new Quiz</a>                   
                      <a href="<?php echo BASE_PATH.'logout.php';?>" class='btn btn-success'>Logout</a>
 
                        <div style="margin-top: 30%">
@@ -91,7 +91,7 @@ if(!empty($_SESSION['name'])){
         </div>
         <footer>
             <p class="text-center" id="foot">
-                
+                  Nathan Lapinski Web Design 2014
             </p>
         </footer>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -46,7 +46,7 @@ if(!empty($_SESSION['name'])){
 	<body>
 	    <header>
             <p class="text-center">
-                Welcome : <?php if(!empty($_SESSION['name'])){echo $_SESSION['name'];}?>
+                Welcome : <?php if(!empty($_SESSION['name'])){echo $_SESSION['name']; echo "<form action='logout.php'><button class='btn btn-success btn-block' type='submit'>Logout</button></form>";}?>
             </p>
         </header>
 
@@ -58,10 +58,15 @@ if(!empty($_SESSION['name'])){
 				<hr>
 				<form class="form-horizontal" role="form" id='login' method="post" action="result.php">
 					<?php 
-					$res = mysql_query("select * from questions where category_id='$category' ORDER BY RAND()") or die(mysql_error());
-                    $rows = mysql_num_rows($res);
+          //get the id that corresponds to the category name
+          $name_to_id = mysql_query("SELECT id from categories where category_name = '$category'") or die(mysql_error());
+          $temp_id = mysql_fetch_row($name_to_id);
+          $cat_id = $temp_id[0];
+					$res = mysql_query("select * from questions where category_id='$cat_id' ORDER BY RAND()") or die(mysql_error());
+          $rows = mysql_num_rows($res);
 					$i=1;
-                while($result=mysql_fetch_array($res)){?>
+          $counter = 0; //This limits the number of questions asked, so we keep it to 10 for now (ie, once this hits 9, we stop)
+                while( $result=mysql_fetch_array($res) ){?>
 
                     <?php if($i==1){?>         
                     <div id='question<?php echo $i;?>' class='cont'>
@@ -79,7 +84,7 @@ if(!empty($_SESSION['name'])){
                     <button id='next<?php echo $i;?>' class='next btn btn-success' type='button'>Next</button>
                     </div>     
 
-                     <?php }elseif($i<1 || $i<$rows){?>
+                     <?php }elseif( ($i<1 || $i<$rows) && $counter < 9){?>
 
                        <div id='question<?php echo $i;?>' class='cont'>
                     <p class='questions' id="qname<?php echo $i;?>"><?php echo $i?>.<?php echo $result['question_name'];?></p>
@@ -97,7 +102,7 @@ if(!empty($_SESSION['name'])){
                     <button id='next<?php echo $i;?>' class='next btn btn-success' type='button' >Next</button>
                     </div>
 
-                   <?php }elseif($i==$rows){?>
+                   <?php }elseif($i==$rows || $counter >= 9){?>
                     <div id='question<?php echo $i;?>' class='cont'>
                     <p class='questions' id="qname<?php echo $i;?>"><?php echo $i?>.<?php echo $result['question_name'];?></p>
                     <input type="radio" value="1" id='radio1_<?php echo $result['id'];?>' name='<?php echo $result['id'];?>'/><?php echo $result['answer1'];?>
@@ -114,14 +119,14 @@ if(!empty($_SESSION['name'])){
                     <button id='pre<?php echo $i;?>' class='previous btn btn-success' type='button'>Previous</button>                    
                     <button id='next<?php echo $i;?>' class='next btn btn-success' type='submit'>Finish</button>
                     </div>
-					<?php } $i++;} ?>
+					<?php } $i++; $counter++;} ?>
 
 				</form>
 			</div>
 		</div>
        <footer>
             <p class="text-center" id="foot">
-                
+                Nathan Lapinski Web Design 2014              
             </p>
         </footer>
 
