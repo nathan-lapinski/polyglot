@@ -79,7 +79,17 @@ if(!empty($_SESSION['name'])){
                        <div style="margin-top: 30%">
                         <p>Total no. of right answers : <span class="answer"><?php echo $right_answer;?></span></p>
                         <p>Total no. of wrong answers : <span class="answer"><?php echo $wrong_answer;?></span></p>
-                        <p>Total no. of Unanswered Questions : <span class="answer"><?php echo $unanswered;?></span></p>                   
+                        <p>Total no. of Unanswered Questions : <span class="answer"><?php echo $unanswered;?></span></p>
+<?php
+   //echo "Selected the collection";
+   //Now, check to see if the user has a corresponding entry in the mongoDB, and if so, update the score there.
+//begin Mongo update shenanigans
+   $m = new MongoClient();
+   //connect to the test db for now
+   $db = $m->nodetest1;   
+   $collection = $db->mytestcollection;
+
+   $collection->update(array("username" => $_SESSION['name']), array('$inc' => array("score" => $right_answer)));                   ?>
                        </div> 
 
                    </div>

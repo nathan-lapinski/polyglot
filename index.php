@@ -76,11 +76,11 @@ require 'config.php';
 								Create Quiz
 							</button>
 						</form>
-						<form class="form-signin" method="post" id='edit_quiz_form' name="edit_quiz_form" action="edit_quiz.php">
+						<!--<form class="form-signin" method="post" id='edit_quiz_form' name="edit_quiz_form" action="edit_quiz.php">
 							<button id="edit_button" class="btn btn-success btn-block" type="submit">
 								Edit Quiz
 							</button>
-						</form>
+						</form>-->
 
 						<?php }else{?>
 						    <form class="form-signin" method="post" id='signin' name="signin" action="questions.php">

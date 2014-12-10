@@ -1,3 +1,26 @@
+<?php
+				//connect to mongodb
+				$m = new MongoClient();
+				//connect to the test db for now
+				$db = $m->nodetest1;
+				//echo "connected to nodetest1";
+				if(!empty($_POST['login_username'])){
+					$username=$_POST['login_username'];
+				} else {
+					echo "ERROR login_username is empty";
+				}
+				if(!empty($_POST['login_password'])){
+					$password=$_POST['login_password'];
+				} else {
+					echo "ERROR login_password is empty";
+				}
+				
+				$collection = $db->mytestcollection;
+				//echo "Selected the collection"; 
+				$result = $collection->findOne(array('password' => $password));
+				//you've got the collection at this point - so blast out the html templating
+
+				?>	
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,6 +39,7 @@
 		<style>
 			.container {
 				margin-top: 110px;
+				min-height: 450px;
 			}
 			.error {
 				color: #B94A48;
@@ -28,7 +52,7 @@
 	</head>
 	<body>
 	    <header>
-            
+            <p class="text-center">Welcome <?php echo $result['username'];?></p>
         </header>
 
 		<div class="container question">
@@ -36,32 +60,41 @@
 				<p>
 					Welcome to Polyglot <a href="index.php">Return to Home</a>
 				</p>
-				<hr>
-				<?php
-				//connect to mongodb
-				$m = new MongoClient();
-				//connect to the test db for now
-				$db = $m->nodetest1;
-				//echo "connected to nodetest1";
-				if(!empty($_POST['login_username'])){
-					$username=$_POST['login_username'];
-				} else {
-					echo "ERROR login_username is empty";
+				<hr>	
+				<style>
+				.user_profile_image_wrapper{
+					width:40%;
+					min-width: 200px;
+					float:left;
 				}
-				if(!empty($_POST['login_password'])){
-					$password=$_POST['login_password'];
-				} else {
-					echo "ERROR login_password is empty";
+				.user_profile_data{
+					width:60%;
+					float:right;
 				}
-				
-				$collection = $db->mytestcollection;
-				echo "Selected the collection";
-				$result = $collection->findOne(array('password' => $password));
-				echo $result['username'] . "\n";
-				echo $result['age'] . "\n";
-				echo $result['country'] . "\n";
-				?>		
+				.user_profile_image{
+					border:8px solid #6F7F8E;
+				}
+				@media (max-width: 992px){
+					.user_profile_image_wrapper, .user_profile_data{
+						float:none;
+					}
+					.user_profile_data{
+						margin-top:5px;
+					}
+				}
+				</style>
+				<div class="user_profile_image_wrapper">
+						<img class="user_profile_image" src="<?php echo $result['path_to_pic'];?>"</img>
+					</div>
+					<div class="user_profile_data">
+						<p>Username: <?php echo $result['username'];?></p>
+						<p>Country: <?php echo $result['country'];?></p>
+						<p>Age: <?php echo $result['age'];?></p>
+						<p>Score: <?php echo $result['score'];?></p>
+					</div>
+				</section>
 			</div>
+
 		</div>
 
        <footer>

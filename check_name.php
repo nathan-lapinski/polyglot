@@ -9,7 +9,8 @@
      if($count[0]==0){
          echo 'true';
      }else{
-         echo 'false';
+         //echo 'false';
+     	echo 'true'; //lol
      }
  }
 ?>

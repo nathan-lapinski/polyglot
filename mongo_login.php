@@ -44,12 +44,12 @@
 				<hr>
 				<button id="mongo_new_user" class="mongo_login_button btn btn-success btn-block">New User</button>
 				<button id="mongo_existing_user" class="mongo_login_button btn btn-success btn-block">Login</button>
-				<form id="mongo_new_user_form" method="post" action="mongo_new_user_form.php">
+				<form id="mongo_new_user_form" method="post" action="mongo_new_user_form.php" enctype="multipart/form-data">
 					<input type="text" name="new_username" id="new_username" placeholder="username"></input>
 					<input type="text" name="new_password" id="new_password" placeholder="password"></input>
 					<input type="number" name="age" id="age" placeholder="age"></input>
 					<input type="text" name="country" id="country" placeholder="country"></input>
-					<!--<input type="file" name="profile_pic" id="profile_pic" /> -->
+					<input type="file" name="fileToUpload" id="fileToUpload" /> 
 					<button value="submit" class="btn btn-success btn-block">Create User</button>
 				</form>
 				<form id="mongo_login_form" method="post" action="mongo_login_form.php">

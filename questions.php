@@ -158,6 +158,7 @@ if(isset($_POST[1])){
    echo "right_answer : ". $right_answer."<br>";
    echo "wrong_answer : ". $wrong_answer."<br>";
    echo "unanswered : ". $unanswered."<br>";
+  
 }
 ?>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
